@@ -31,49 +31,49 @@ import com.qlearning.repositories.UsersRepository;
 @RestController()
 @RequestMapping("/api")
 public class ChaptersController {
-	
+
 	@Autowired
 	private ChapterRepository cRepo;
-	
+
 	@Autowired
 	private LearningRepository lRepo;
-	
+
 	@Autowired
 	private QuestionRepository qRepo;
 
 	@Autowired
 	private UserTxnRepository usrTxnRepo;
-	
+
 	@Autowired
 	private UsersRepository userRepo;
-	
+
 	@Autowired
 	private PasswordEncoder encoder;
-	
+
 	@GetMapping("/user")
-	  public Principal user(Principal user) {
-	    return user;
-	  }
+	public Principal user(Principal user) {
+		return user;
+	}
 
 	@GetMapping("/chapters")
 	public List<Chapters> getChapters() {
 		return cRepo.findAll();
 	}
-	
-	@GetMapping(value= {"/learning", "/learning/{chapterid}"})
+
+	@GetMapping(value = { "/learning", "/learning/{chapterid}" })
 	public List<Learning> getLearning(@PathVariable Optional<Integer> chapterid) {
-		if(chapterid.isPresent()) {
+		if (chapterid.isPresent()) {
 			return lRepo.findByChapterId(chapterid.get());
-		}
-		else {
+		} else {
 			return lRepo.findAll();
 		}
 	}
-	
+
 	@GetMapping(value = { "/question/chapter={chapter_id}/question={question_id}" })
 	public Question getQuestion(@PathVariable Optional<String> chapter_id, @PathVariable Optional<String> question_id) {
 		// return qRepo.findByQuestionId(question_id.get());
-		return qRepo.findByChapterIdAndQuestionId(Integer.parseInt(chapter_id.get()), Integer.parseInt(question_id.get()));
+		return qRepo.findByChapterIdAndQuestionId(Integer.parseInt(chapter_id.get()),
+				Integer.parseInt(question_id.get()));
 	}
 
 	@PostMapping("/submitquiz")
@@ -92,7 +92,7 @@ public class ChaptersController {
 		}
 		return HttpStatus.OK;
 	}
-	
+
 	@PostMapping("/registerUser")
 	public HttpStatus registerUser(@RequestBody Users user) {
 		try {
@@ -106,5 +106,12 @@ public class ChaptersController {
 		}
 		return HttpStatus.OK;
 	}
-	
+
+	@GetMapping(value = {"/toggleCompleted/{object_id}"})
+	public void toggleCompleted(@PathVariable String object_id) {
+		Learning learning = lRepo.findById(object_id).get();
+		learning.setCompleted(!learning.isCompleted());
+		lRepo.save(learning);
+	}
+
 }

@@ -17,6 +17,10 @@ public class Learning {
 	private int chapterId;
 	private String description;
 	private String resource_link;
+	private String resource_type;
+	private String resource_length;
+	private boolean completed;
+	
 	
 	public String get_id() {
 		return _id.toHexString();
@@ -55,7 +59,37 @@ public class Learning {
 	public void setResource_link(String resource_link) {
 		this.resource_link = resource_link;
 	}
-	
-	
 
+	public int getChapterId() {
+		return chapterId;
+	}
+
+	public void setChapterId(int chapterId) {
+		this.chapterId = chapterId;
+	}
+
+	public String getResource_type() {
+		return resource_type;
+	}
+
+	public void setResource_type(String resource_type) {
+		this.resource_type = resource_type;
+	}
+
+	public String getResource_length() {
+		return resource_length;
+	}
+
+	public void setResource_length(String resource_length) {
+		this.resource_length = resource_length;
+	}
+
+	public boolean isCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
+	}
+	
 }

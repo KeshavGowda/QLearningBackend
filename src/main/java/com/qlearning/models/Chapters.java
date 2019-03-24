@@ -12,12 +12,14 @@ public class Chapters {
 
 	private int chapter_id;
 	private String chapter_name;
+	private String description;
 
-	public Chapters(ObjectId _id, int chapter_id, String chapter_name) {
+	public Chapters(ObjectId _id, int chapter_id, String chapter_name, String description) {
 		super();
 		this._id = _id;
 		this.chapter_id = chapter_id;
 		this.chapter_name = chapter_name;
+		this.description = description;
 	}
 
 	public String get_id() {
@@ -42,6 +44,14 @@ public class Chapters {
 
 	public void setChapter_name(String chapter_name) {
 		this.chapter_name = chapter_name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }
