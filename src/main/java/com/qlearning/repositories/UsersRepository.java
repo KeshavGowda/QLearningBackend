@@ -2,10 +2,10 @@ package com.qlearning.repositories;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.qlearning.models.Users;
+import com.qlearning.models.User;
 
-public interface UsersRepository extends MongoRepository<Users, String>{
+public interface UsersRepository extends MongoRepository<User, String>{
 	
-	Users findByUsername(String username);
+	User findByUsername(String username);
 
 }
